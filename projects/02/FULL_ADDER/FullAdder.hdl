@@ -1,0 +1,21 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/FullAdder.hdl
+
+/**
+ * Computes the sum of three bits.
+ */
+
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs
+    OUT sum,     // Right bit of a + b + c
+        carry;   // Left bit of a + b + c
+
+    PARTS:
+    And(a=a,b=b,out=a1);        // 입력 a와 b의 AND 결과를 a1에 저장
+    Xor(a=a,b=b,out=b1);        // 입력 a와 b의 XOR 결과를 b1에 저장
+    Xor(a=b1,b=c,out=sum);      // b1과 c(아래 자리수 캐리)의 XOR 결과를 최종 합(sum)으로 출력
+    And(a=b1,b=c,out=bc1);      // b1과 c(아래 자리수 캐리)의 AND 결과를 bc1에 저장
+    Or(a=a1,b=bc1,out=carry);   // a1과 bc1의 OR 결과를 최종 자리 올림(위 자리수 캐리)으로 출력
+}
