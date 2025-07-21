@@ -44,7 +44,7 @@ CHIP ALU {
     PARTS:
     // x 입력 처리
     // zero the x input?
-    Mux16(a=x, b=false, sel=zx, out=zeroedX);
+    Mux16(a=x, b[0..15]=false, sel=zx, out=zeroedX);
     // negate the x input?
     Not16(in=zeroedX, out=notZeroedX);
     // choose negated x input?
@@ -52,7 +52,7 @@ CHIP ALU {
 
     // y 입력 처리
     // zero the y input?
-    Mux16(a=y, b=false, sel=zy, out=zeroedY);
+    Mux16(a=y, b[0..15]=false, sel=zy, out=zeroedY);
     // negate the x input?
     Not16(in=zeroedY, out=notZeroedY);
     // choose negated y input?
