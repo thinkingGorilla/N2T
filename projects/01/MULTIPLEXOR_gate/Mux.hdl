@@ -1,0 +1,31 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux.hdl
+
+/** 
+ * Multiplexor:
+ * out = a if sel == 0
+ *       b otherwise
+ */
+
+CHIP Mux {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+    /**
+     * out = (NOT sel AND a) OR (sel AND b)
+     * sel = 0이면 → outA = a, outB = 0
+     * sel = 1이면 → outA = 0, outB = b
+     *
+     * 왜 OR를 쓰나?
+     * 선택되지 않은 입력은 notSel과 AND 연산으로 0이 되므로 죽어 있음
+     * 선택된 입력만 살아 있는데, 그 값은 0일 수도 있고 1일 수도 있음
+     * OR은 "둘 중 살아 있는 하나"를 출력으로 내보냄
+     **/
+    Not(in=sel, out=notSel);
+    And(a=a, b=notSel, out=outA);
+    And(a=b, b=sel, out=outB);
+    Or(a=outA, b=outB, out=out);
+}
