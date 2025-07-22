@@ -1,0 +1,24 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Bit.hdl
+
+/**
+ * 1-bit register:
+ * If load(t-1) == 1 then out(t) = in(t-1)
+ *                   else out(t) = out(t-1)
+ */
+
+CHIP Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    // Mux는 선택 비트(load)에 따라 새로운 입력 값(in)을 저장할지, 이전에 저장된 값(dout)을 유지할지 결정한다.
+    Mux(a=dout, b=in, sel=load, out=din);
+    // DFF는 클럭 신호가 발생할 때마다 직전 클럭에서의 입력 신호를 출력한다. → out(t) = in(t-1)
+    // DFF의 출력을 Mux의 입력 중 하나로 연결한다.
+    // Mux의 선택 비트(sel)가 1이면, 새로운 입력 값(in)이 저장(BIT가 갱신)되고,
+    // 선택 비트(sel)가 0이면, 이전에 저장된 값을 계속 유지한다.
+    DFF(in=din, out=dout, out=out);
+}
