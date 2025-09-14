@@ -8,6 +8,11 @@
 
 // Put your code here.
 
+// while(multiplier > 0) {
+//   product += multiplicand;
+//   multiplier--;
+// }
+
 @R0 // 데이터 메모리 주소0번의 값을 A레지스터에 넣는다.
 D=M // D레지스터에 A레지스터에 있는 값을 데이터 메모리의 주소로 하는 값을 가져온다. 즉, M[R0]를 가져온다.
 @multiplier // A레지스터 임의의 주소 multiplier를 넣는다.
